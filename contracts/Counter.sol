@@ -31,12 +31,13 @@ contract Counter {
         dividedNum = int(count) / _dividedNum;
         return dividedNum;
     }
-    function getAllNums() public view returns(string memory){
-       string memory result = string(abi.encodePacked(
-        "Added number is ", addedNum.toString(),
-        ", Multiplied number is ", multipliedNum.toString(),
-        ", Subtracted number is ", subtractedNum.toString(),
-        ", Divided number is ", dividedNum.toString()));
-    return result;
-    }
+    function getAllNums() public view returns(int[] memory){
+    int[] memory nums = new int[](4);
+    nums[0] = addedNum;
+    nums[1] = multipliedNum;
+    nums[2] = subtractedNum;
+    nums[3] = dividedNum;
+    return nums;
+}
+
 }
