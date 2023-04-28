@@ -4,40 +4,58 @@ pragma solidity ^0.8.9;
 
 contract Counter {
     uint public count;
-    int public addedNum = 0;
-    int public dividedNum = 0;
-    int public subtractedNum = 0;
-    int public multipliedNum = 0;
-    function getCount() public view returns(uint){
+    uint public addedNum;
+    uint public dividedNum;
+    uint public subtractedNum;
+    uint public multipliedNum;
+
+    function getCount() public view returns (uint) {
         return count;
     }
-    function increment() public returns(uint){
+
+    function increment() public returns (uint) {
         count++;
         return count;
     }
-    function add(int _addedNum) public returns(int){
-        addedNum = int(count) + _addedNum;
+
+    function add(uint num1, uint num2) public numbersGreaterThanZero(num1, num2) returns (uint) {
+        addedNum = num1 + num2;
         return addedNum;
     }
-    function multiply(int _multipliedNum) public returns(int){
-        multipliedNum = int(count) * _multipliedNum;
+
+    function multiply(uint num1, uint num2) public numbersGreaterThanZero(num1, num2) returns (uint) {
+        multipliedNum = num1 * num2;
         return multipliedNum;
     }
-    function subtract(int _subtractedNum) public returns(int){
-        subtractedNum = int(count) - _subtractedNum;
+
+    function subtract(uint num1, uint num2) public numbersGreaterThanZero(num1, num2) returns (uint) {
+        subtractedNum = num1 - num2;
         return subtractedNum;
     }
-    function divide(int _dividedNum) public returns(int){
-        dividedNum = int(count) / _dividedNum;
+
+    function divide(uint num1, uint num2) public numbersGreaterThanZero(num1, num2) returns (uint) {
+        require(
+            num2 != 0,
+            "num2 is zero therefore num1 can't be divided by it"
+        );
+        dividedNum = num1 / num2;
         return dividedNum;
     }
-    function getAllNums() public view returns(int[] memory){
-    int[] memory nums = new int[](4);
-    nums[0] = addedNum;
-    nums[1] = multipliedNum;
-    nums[2] = subtractedNum;
-    nums[3] = dividedNum;
-    return nums;
-}
 
+    function getAllNums() public view returns (uint[] memory) {
+        uint[] memory nums = new uint[](4);
+        nums[0] = addedNum;
+        nums[1] = multipliedNum;
+        nums[2] = subtractedNum;
+        nums[3] = dividedNum;
+        return nums;
+    }
+
+    modifier numbersGreaterThanZero(uint num1, uint num2) {
+        require(
+            num1 > 0 && num2 > 0,
+            "The numbers should be bigger than zero."
+        );
+        _;
+    }
 }
