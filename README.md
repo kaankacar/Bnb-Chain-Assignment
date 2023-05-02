@@ -1,6 +1,7 @@
-# Sample Hardhat Project
+Contract Address: 0xe799385A8055123692ad778f6aE984f9101Fb572
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+
+# BNBChain Web3 Project
 
 Try running some of the following tasks:
 
